@@ -7,13 +7,6 @@ export const StyledContainer = styled.div`
     cursor: pointer;
 `
 
-export const CardHeader = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-`
-
 export const StyledImage = styled.div`
     width: 100%;
     height: 250px;
