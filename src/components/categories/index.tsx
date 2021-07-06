@@ -4,11 +4,9 @@ import { useState } from "react";
 export default function Categories({ setState = (id: any) => { return id } }) {
 	const state = useSelector((store: any) => store.categories)
 	const [open, setOpen] = useState(false)
-	const [id, setId] = useState("")
 	const handleClick = (id: any) => {
 		setState("&category_ids=" + id)
 		setOpen(false)
-		setId(id)
 	}
 	return (
 		<>

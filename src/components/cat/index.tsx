@@ -1,12 +1,12 @@
 import { StyledContainer, CardHeader, StyledImage } from '../../styles'
 
-interface Card {
+interface CardInterfacre {
     id?: number;
     name?: string;
     image?: string;
 }
 
-export default function Card(props: Card) {
+export default function Card(props: CardInterfacre) {
     const { name, image } = props
     return (
         <StyledContainer>
