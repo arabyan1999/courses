@@ -1,5 +1,6 @@
 import { FILTER_BY_TYPE } from "./action";
-let globalState: object = {
+import { IStore } from './../utils/interfece';
+let globalState = {
     courses: [
         {
             id: 1,
@@ -28,7 +29,8 @@ let globalState: object = {
     }
 }
 
-export default function reducer(state: Object = globalState, action: any) {
+export default function reducer(state: Object = globalState, action: { type: string; data: IStore[] }) {
+    console.log(action.data)
     switch (action.type) {
         case FILTER_BY_TYPE:
             return {

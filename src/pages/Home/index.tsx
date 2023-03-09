@@ -12,23 +12,28 @@ import {
 } from '../styles'
 import Course from './components/Course'
 import { FILTER_BY_TYPE } from "../../store/action";
+import { IStore } from '../../utils/interfece'
 
-interface IStore {
-    id: number,
-    name: string,
-    lessonsQuantity: number,
-    duration: number,
-    backgroundImage: string,
-    favorite: boolean,
-    newest: boolean,
-    popular: boolean
+interface ICources {
+    courses: IStore[];
+    filtered: {
+        data: IStore[];
+        type: string;
+    }
+}
+
+enum FilteredTypeEnum {
+    POPULAR = "popular",
+    FAVORITE = "favorite",
+    NEWEST = "newest"
 }
 
 export default function Home() {
-    const { courses, filtered } = useSelector((store: any) => store)
+    const { courses, filtered } = useSelector((store: ICources) => store)
+
     const dispatch = useDispatch()
 
-    const handleFilterData = (type: "popular" | "favorite" | "newest") => {
+    const handleFilterData = (type: FilteredTypeEnum) => {
         const filteredByType = courses.filter((element: IStore) => element[type] === true)
         const filteredData = {
             type,
@@ -38,7 +43,7 @@ export default function Home() {
     }
     
     useEffect(() => {
-        handleFilterData('popular')
+        handleFilterData(FilteredTypeEnum.POPULAR)
     }, [])
 
     return (
@@ -48,13 +53,22 @@ export default function Home() {
                 <StyledHeader>
                     <StyledTitle>Courses</StyledTitle>
                     <StyledMenu>
-                        <StyledButton onClick={() => handleFilterData('popular')} isActive={filtered.type === "popular"}>
+                        <StyledButton
+                            onClick={() => handleFilterData(FilteredTypeEnum.POPULAR)}
+                            isActive={filtered.type === FilteredTypeEnum.POPULAR}
+                        >
                             Popular
                         </StyledButton>
-                        <StyledButton onClick={() => handleFilterData('favorite')} isActive={filtered.type === "favorite"}>
+                        <StyledButton
+                            onClick={() => handleFilterData(FilteredTypeEnum.FAVORITE)}
+                            isActive={filtered.type === FilteredTypeEnum.FAVORITE}
+                        >
                             Favorite
                         </StyledButton>
-                        <StyledButton onClick={() => handleFilterData('newest')} isActive={filtered.type === "newest"}>
+                        <StyledButton
+                            onClick={() => handleFilterData(FilteredTypeEnum.NEWEST)}
+                            isActive={filtered.type === FilteredTypeEnum.NEWEST}
+                        >
                             New
                         </StyledButton>
                     </StyledMenu>

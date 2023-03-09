@@ -10,8 +10,12 @@ interface ICourse {
     duration: number;
 }
 
+interface IImages {
+    [key: string]: string | undefined
+}
+
 const Course = ({ name, lessonsQuantity, backgroundImage, duration }: ICourse) => {
-    const images: any = {
+    const images: IImages = {
         illustration,
         graphic_design
     }
