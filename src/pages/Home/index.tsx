@@ -11,8 +11,8 @@ import {
     StyledContainer
 } from '../styles'
 import Course from './components/Course'
-import { FILTER_BY_TYPE } from "../../store/action";
 import { IStore } from '../../utils/interfece'
+import { filter } from '../../store/filterSlice'
 
 interface ICources {
     courses: IStore[];
@@ -29,7 +29,9 @@ enum FilteredTypeEnum {
 }
 
 export default function Home() {
-    const { courses, filtered } = useSelector((store: ICources) => store)
+    const { courses, filtered } = useSelector((store: ICources) => {
+        return store
+    })
 
     const dispatch = useDispatch()
 
@@ -39,7 +41,7 @@ export default function Home() {
             type,
             data: filteredByType
         }
-        dispatch({ type: FILTER_BY_TYPE, data: filteredData })
+        dispatch(filter(filteredData))
     }
     
     useEffect(() => {

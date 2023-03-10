@@ -1,15 +1,13 @@
 import "./styles/style.css"
-import { createStore, compose, applyMiddleware } from "redux"
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux"
-import reducer from "./store/reducer";
+import filterReducer from "./store/filterSlice"
 import { BrowserRouter, Route } from "react-router-dom"
 import {Home, ShoppingList, Customers} from "./pages";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware()))
-
-// const store = createStore(reducer)
+const store = configureStore({
+  reducer: filterReducer,
+})
 
 function App() {
   return (

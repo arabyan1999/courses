@@ -1,6 +1,6 @@
-import { FILTER_BY_TYPE } from "./action";
-import { IStore } from './../utils/interfece';
-let globalState = {
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
     courses: [
         {
             id: 1,
@@ -29,16 +29,17 @@ let globalState = {
     }
 }
 
-export default function reducer(state: Object = globalState, action: { type: string; data: IStore[] }) {
-    console.log(action.data)
-    switch (action.type) {
-        case FILTER_BY_TYPE:
-            return {
-                ...state,
-                filtered: action.data
-            }
-        default:
-            return state;
+export const filterSlice = createSlice({
+    name: "filter",
+    initialState,
+    reducers: {
+        filter: (state, action) => {
+            state.filtered = action.payload
+        },
+        defaultState: state => state
     }
-}
+})
 
+export const { filter, defaultState } = filterSlice.actions;
+
+export default filterSlice.reducer;
